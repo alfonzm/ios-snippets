@@ -45,6 +45,7 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="30"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="willNotBounceWhileHolding" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </button>
                         </subviews>

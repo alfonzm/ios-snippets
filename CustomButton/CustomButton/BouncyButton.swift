@@ -11,25 +11,33 @@ import UIKit
 class BouncyButton: DesignableButton {
 	@IBInspectable var scaleTarget: CGFloat = 0.9
 	
+	// If true, button will bounce right away even when holding
+	// If false, button will only bounce on touch release
+	@IBInspectable var immediate: Bool = false
+	
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		self.bounce()
+		
+		if immediate {
+			self.revertScale()
+		}
+		
 		super.touchesBegan(touches, with: event)
 	}
 	
 	override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-		self.revertScale()
+		if !immediate {
+			self.revertScale()
+		}
 		super.touchesBegan(touches, with: event)
 	}
 	
 	private func bounce() {
-		UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0, options: .allowUserInteraction, animations: {
-			
-			self.transform = CGAffineTransform(scaleX: self.scaleTarget, y: self.scaleTarget)
-		}, completion: nil)
+		self.transform = CGAffineTransform(scaleX: self.scaleTarget, y: self.scaleTarget)
 	}
 	
 	private func revertScale() {
-		UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .allowUserInteraction, animations: {
+		UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 6, options: .allowUserInteraction, animations: {
 			self.transform = CGAffineTransform.identity
 		}, completion: nil)
 	}
