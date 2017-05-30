@@ -18,6 +18,8 @@ class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSo
 		return [vc1, vc2, vc3]
 	}()
 	
+	var vcIndexToAnimate: Int = 0
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 		
@@ -36,13 +38,20 @@ class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSo
     }
 	
 	// MARK: Page view delegate
+
+	/*
 	func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
-		print(pendingViewControllers.first!.restorationIdentifier!)
+		if let index = viewControllerList.index(of: pendingViewControllers.first!) {
+			vcIndexToAnimate = index
+		}
 	}
 	
 	func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-		print("\(previousViewControllers.first!.restorationIdentifier!) \(finished) \(completed)")
+		if finished && completed {
+			print(vcIndexToAnimate)
+		}
 	}
+	*/
 	
 	// MARK: Page view data source
 	func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
